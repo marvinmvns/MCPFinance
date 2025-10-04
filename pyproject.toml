@@ -1,0 +1,79 @@
+[tool.poetry]
+name = "clean-api"
+version = "1.0.0"
+description = "FastAPI + Clean Architecture service with observability, security, and CI"
+authors = ["Your Name <you@example.com>"]
+readme = "README.md"
+packages = [{ include = "app", from = "src" }]
+
+[tool.poetry.dependencies]
+python = "^3.12"
+fastapi = "^0.112.0"
+uvicorn = {version = "^0.30.0", extras=["standard"]}
+pydantic = "^2.8.2"
+pydantic-settings = "^2.4.0"
+sqlalchemy = "^2.0.32"
+alembic = "^1.13.2"
+asyncpg = "^0.29.0"
+aiosqlite = "^0.20.0"
+httpx = "^0.27.0"
+tenacity = "^8.5.0"
+pybreaker = "^1.0.2"
+structlog = "^24.1.0"
+prometheus-client = "^0.20.0"
+opentelemetry-sdk = "^1.28.0"
+opentelemetry-instrumentation-fastapi = "^0.49b0"
+opentelemetry-instrumentation-httpx = "^0.49b0"
+opentelemetry-exporter-otlp = "^1.28.0"
+PyJWT = "^2.9.0"
+python-multipart = "^0.0.9"
+email-validator = "^2.2.0"
+typing-extensions = "^4.12.2"
+# MCP and gRPC dependencies
+mcp = "^1.1.2"
+grpcio = "^1.68.1"
+grpcio-tools = "^1.68.1"
+grpcio-reflection = "^1.68.1"
+# Data generation and validation
+faker = "^33.1.0"
+pyyaml = "^6.0.2"
+jsonschema = "^4.23.0"
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^8.3.2"
+pytest-asyncio = "^0.23.8"
+coverage = "^7.6.1"
+schemathesis = "^3.29.8"
+ruff = "^0.6.4"
+black = "^24.8.0"
+mypy = "^1.11.1"
+bandit = "^1.7.9"
+pre-commit = "^3.8.0"
+types-pyjwt = "^1.7.1"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+select = ["E","F","I","B","UP","BLE","N","ASYNC","C4","SIM","T20","PIE"]
+ignore = ["E501"]
+
+[tool.black]
+line-length = 100
+target-version = ["py312"]
+
+[tool.mypy]
+python_version = "3.12"
+strict = true
+warn_unreachable = true
+warn_unused_ignores = true
+exclude = ["alembic/"]
+
+[tool.pytest.ini_options]
+addopts = "-q --disable-warnings --maxfail=1"
+testpaths = ["tests"]
+asyncio_mode = "strict"
+
